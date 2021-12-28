@@ -5,8 +5,8 @@ It acts as a proxy for [Planning Center](https://www.planningcenter.com/), where
 
 ## URLs
 
-GET /members - returns all members
-GET /members/id - returns a specific member or not found
+GET /v1/members - returns all members
+GET /v2/members/id - returns a specific member or not found
 
 ## How to debug
 
