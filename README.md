@@ -10,7 +10,7 @@ GET /members/id - returns a specific member or not found
 
 ## How to debug
 
-* `npm run build -- -w`: Typescript build in watch mode
+* `npm run build:watch`: Typescript build in watch mode
 * `firebase emulators:start --inspect-functions`: Start firebase emulator with debug mode
 * Click on "Debug" profile on VS Code
 * Hit http://localhost:5001/hanbit-directory-dev/us-central1/members from Postman
