@@ -1,0 +1,11 @@
+name: Build and test on PR
+on: [pull_request]
+
+jobs:
+  main:
+    name: Deploy to Firebase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd functions && npm ci && npm run build
+      
