@@ -11,7 +11,7 @@ app.use(cors({ origin: true }));
 // app.use(myMiddleware);
 
 // build multiple CRUD interfaces:
-app.get("/:id", (req, res) => {
+app.get("/members/:id", (req, res) => {
   const member = getMemberById(req.params.id);
   if (member) {
     res.send(getMemberById(req.params.id));
@@ -22,6 +22,6 @@ app.get("/:id", (req, res) => {
 // app.post('/', (req, res) => res.send(Widgets.create()));
 // app.put('/:id', (req, res) => res.send(Widgets.update(req.params.id, req.body)));
 // app.delete('/:id', (req, res) => res.send(Widgets.delete(req.params.id)));
-app.get("/", (req, res) => res.send(getAllMembers()));
+app.get("/members/", (req, res) => res.send(getAllMembers()));
 
 export default app;

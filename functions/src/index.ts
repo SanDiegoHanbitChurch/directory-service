@@ -4,4 +4,4 @@ import app from "./app";
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
 //
-exports.members = functions.https.onRequest(app);
+exports.v1 = functions.https.onRequest(app);
