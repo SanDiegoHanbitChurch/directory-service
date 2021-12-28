@@ -1,5 +1,5 @@
-import { find, range } from 'lodash';
-import * as faker from 'faker';
+import {find, range} from "lodash";
+import * as faker from "faker";
 
 export type Member = {
   id: string;
@@ -16,16 +16,16 @@ const members = range(0, 10).map(() => {
   return {
     id: faker.datatype.uuid(),
     name: `${firstName} ${lastName}`,
-    avatar: 'https://i.pravatar.cc/300',
+    avatar: "https://i.pravatar.cc/300",
     phone: faker.phone.phoneNumber(),
-    email: faker.internet.email(firstName, lastName)
+    email: faker.internet.email(firstName, lastName),
   };
 });
 
 export const getMemberById = (id: string): Member | undefined => {
-  return find(members, { id });
+  return find(members, {id});
 };
 
 export const getAllMembers = (): Member[] => {
   return members;
-}
+};
