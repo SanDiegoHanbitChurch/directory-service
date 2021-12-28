@@ -4,12 +4,36 @@ on:
     branches:
       - main
 jobs:
-  main:
-    name: Deploy to Firebase
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: lowply/deploy-firebase@v0.0.5
-      env:
-        FIREBASE_TOKEN: '${{ secrets.FIREBASE_TOKEN }}'
-        FIREBASE_PROJECT: hanbit-directory-dev
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: cd functions && npm ci
+      - name: Build
+        run: cd functions && npm run build
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: lib
+          path: lib
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: lib
+          path: lib
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
