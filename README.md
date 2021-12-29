@@ -3,6 +3,12 @@
 Hanbit Directory Service is a facade/BFF for Hanbit Directory App (both web and mobile).
 It acts as a proxy for [Planning Center](https://www.planningcenter.com/), where all Hanbit members are registered and maintained.
 
+## Environments
+
+| Environment | Host |
+|-------------|------|
+| Dev         | https://us-central1-hanbit-directory-dev.cloudfunctions.net/ |
+
 ## URLs
 
 | Method | Route           | Request | Status Code / Response | Note                                   |
