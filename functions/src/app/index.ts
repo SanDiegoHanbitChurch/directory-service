@@ -11,7 +11,8 @@ app.use(cors({origin: true}));
 // Add middleware to authenticate requests
 // app.use(myMiddleware);
 
-export default (planningCenter: PlanningCenterInterface): any => {
+export default (planningCenter: PlanningCenterInterface):
+  Express.Application => {
   const {getMemberById, getAllMembers, searchMembers} =
     initMembers(planningCenter);
 
