@@ -11,8 +11,10 @@ app.use(cors({origin: true}));
 // Add middleware to authenticate requests
 // app.use(myMiddleware);
 
-export default (planningCenter: PlanningCenterInterface):
-  Express.Application => {
+export default (
+    planningCenter: PlanningCenterInterface
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any => {
   const {getMemberById, getAllMembers, searchMembers} =
     initMembers(planningCenter);
 
@@ -29,7 +31,7 @@ export default (planningCenter: PlanningCenterInterface):
   app.get("/members/", async (req, res) => {
     let members = [];
 
-    if (req.query.query) {
+    if (req.query["query"]) {
       const {query} = req.query;
       members = await searchMembers(query as string);
     } else {
