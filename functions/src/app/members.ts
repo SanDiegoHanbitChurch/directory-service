@@ -1,31 +1,36 @@
-import {find, range} from "lodash";
-import * as faker from "faker";
+import {Member} from "./types";
+import {PlanningCenterInterface} from "../planningCenter";
+import {toMembers} from "./convert";
 
-export type Member = {
-  id: string;
-  name: string;
-  avatar: string;
-  phone: string;
-  email: string;
+export type MembersInterface = {
+  getMemberById: (id: string) => Promise<Member | undefined>;
+  getAllMembers: (offset: number) => Promise<Member[]>;
+  searchMembers: (query: string) => Promise<Member[]>;
 };
 
-const members = range(0, 10).map(() => {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
+export default (planningCenter: PlanningCenterInterface): MembersInterface => {
+  const {getById, getAll, search} = planningCenter;
+
+  const getMemberById = async (id: string): Promise<Member | undefined> => {
+    const people = await getById(id);
+    const members = toMembers(people);
+
+    return members.length === 0 ? undefined : members[0];
+  };
+
+  const getAllMembers = async (offset: number): Promise<Member[]> => {
+    const people = await getAll(offset);
+    return toMembers(people);
+  };
+
+  const searchMembers = async (query: string): Promise<Member[]> => {
+    const people = await search(query);
+    return toMembers(people);
+  };
 
   return {
-    id: faker.datatype.uuid(),
-    name: `${firstName} ${lastName}`,
-    avatar: "https://i.pravatar.cc/300",
-    phone: faker.phone.phoneNumber(),
-    email: faker.internet.email(firstName, lastName),
+    getMemberById,
+    getAllMembers,
+    searchMembers,
   };
-});
-
-export const getMemberById = (id: string): Member | undefined => {
-  return find(members, {id});
-};
-
-export const getAllMembers = (): Member[] => {
-  return members;
 };
