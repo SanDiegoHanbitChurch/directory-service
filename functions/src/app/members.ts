@@ -1,6 +1,6 @@
-import { Member } from "./types";
-import { PlanningCenterInterface } from "../planningCenter";
-import { toMembers } from "./convert";
+import {Member} from "./types";
+import {PlanningCenterInterface} from "../planningCenter";
+import {toMembers} from "./convert";
 
 export type MembersInterface = {
   getMemberById: (id: string) => Promise<Member | undefined>;
@@ -9,7 +9,7 @@ export type MembersInterface = {
 };
 
 export default (planningCenter: PlanningCenterInterface): MembersInterface => {
-  const { getById, getAll, search } = planningCenter;
+  const {getById, getAll, search} = planningCenter;
 
   const getMemberById = async (id: string): Promise<Member | undefined> => {
     const people = await getById(id);

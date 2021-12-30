@@ -1,9 +1,9 @@
 import * as functions from "firebase-functions";
-import PlanningCenter from "./planningCenter";
+import initPlanningCenter from "./planningCenter";
 import app from "./app";
 
-const { planningcenter } = functions.config();
-const planningCenter = PlanningCenter({
+const {planningcenter} = functions.config();
+const planningCenter = initPlanningCenter({
   baseUrl: planningcenter.baseurl,
   applicationId: planningcenter.applicationid,
   secret: planningcenter.secret,

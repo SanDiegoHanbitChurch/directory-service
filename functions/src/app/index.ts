@@ -1,19 +1,19 @@
 import * as express from "express";
 import * as cors from "cors";
-import Members from "./members";
-import { PlanningCenterInterface } from "../planningCenter";
+import initMembers from "./members";
+import {PlanningCenterInterface} from "../planningCenter";
 
 const app = express();
 
 // Automatically allow cross-origin requests
-app.use(cors({ origin: true }));
+app.use(cors({origin: true}));
 
 // Add middleware to authenticate requests
 // app.use(myMiddleware);
 
 export default (planningCenter: PlanningCenterInterface): any => {
-  const { getMemberById, getAllMembers, searchMembers } =
-    Members(planningCenter);
+  const {getMemberById, getAllMembers, searchMembers} =
+    initMembers(planningCenter);
 
   // build multiple CRUD interfaces:
   app.get("/members/:id", async (req, res) => {
@@ -29,10 +29,10 @@ export default (planningCenter: PlanningCenterInterface): any => {
     let members = [];
 
     if (req.query.query) {
-      const { query } = req.query;
+      const {query} = req.query;
       members = await searchMembers(query as string);
     } else {
-      const { offset } = req.query;
+      const {offset} = req.query;
       members = await getAllMembers(parseInt(offset as string));
     }
 
