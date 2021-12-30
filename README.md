@@ -11,10 +11,11 @@ It acts as a proxy for [Planning Center](https://www.planningcenter.com/), where
 
 ## URLs
 
-| Method | Route           | Request | Status Code / Response | Note                                   |
-| ------ | --------------- | ------- | ---------------------- | -------------------------------------- |
-| GET    | /v1/members     | N/A     | 200 Member[]           | returns all members                    |
-| GET    | /v1/members/:id | N/A     | 200 Member <br> 404 Not Found   | returns a specific member or not found |
+| Method | Route                          | Status Code / Response         | Note                                   |
+| ------ | -------------------------------| -------------------------------| -------------------------------------- |
+| GET    | /v1/members                    | 200 Member[]                   | returns all members                    |
+| GET    | /v1/members/:id                | 200 Member <br> 404 Not Found  | returns a specific member or not found |
+| GET    | /v1/members?query=searchTerm   | 200 Member[]                   | returns matching members or empty result |
 
 ## Response Schema
 
@@ -27,6 +28,7 @@ It acts as a proxy for [Planning Center](https://www.planningcenter.com/), where
 | avatar | string (url) | yes |
 | phone | string |  no |
 | email | string |  no |
+| address | Address | no |
 
 ## How to debug
 
