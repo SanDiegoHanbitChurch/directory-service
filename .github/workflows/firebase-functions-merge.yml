@@ -12,6 +12,24 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: cd functions && npm ci
+      - name: Set environment configuration
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set planningcenter.applicationid=${{ secrets.PLANNING_CENTER_APPLICATION_ID }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Set environment configuration
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set planningcenter.secret=${{ secrets.PLANNING_CENTER_SECRET }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Set environment configuration
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set planningcenter.peopleurl=${{ secrets.PLANNING_PEOPLE_URL }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
