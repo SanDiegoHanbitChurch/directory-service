@@ -20,10 +20,10 @@ export type RelationshipData = {
 export type Relationship = {
   links?: RelationshipLinks;
   data: RelationshipData[];
-}
+};
 export type Relationships = {
   [key: string]: Relationship;
-}
+};
 
 export type PlanningCenterItem = {
   type: string;
@@ -31,10 +31,10 @@ export type PlanningCenterItem = {
   attributes: Attributes;
   relationships: Relationships;
   links: Links;
-}
+};
 
 export type PeopleResponse = {
   links: Links;
   data: PlanningCenterItem[];
-  included: PlanningCenterItem[]
-}
+  included: PlanningCenterItem[];
+};
