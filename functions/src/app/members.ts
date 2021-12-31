@@ -1,15 +1,18 @@
-import {Member} from "./types";
-import {PlanningCenterInterface} from "../planningCenter";
-import {toMembers} from "./convert";
+import { Member } from "./types";
+import { PlanningCenterInterface } from "../planningCenter";
+import { toMembers } from "./convert";
 
 export type MembersInterface = {
+  // eslint-disable-next-line no-unused-vars
   getMemberById: (id: string) => Promise<Member | undefined>;
+  // eslint-disable-next-line no-unused-vars
   getAllMembers: (offset: number) => Promise<Member[]>;
+  // eslint-disable-next-line no-unused-vars
   searchMembers: (query: string) => Promise<Member[]>;
 };
 
 export default (planningCenter: PlanningCenterInterface): MembersInterface => {
-  const {getById, getAll, search} = planningCenter;
+  const { getById, getAll, search } = planningCenter;
 
   const getMemberById = async (id: string): Promise<Member | undefined> => {
     const people = await getById(id);
