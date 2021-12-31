@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as cors from "cors";
+import middlewares from "./middlewares";
 import initMembers from "./members";
 import {PlanningCenterInterface} from "../planningCenter";
 
@@ -9,6 +10,7 @@ const app = express();
 app.use(cors({origin: true}));
 
 // Add middleware to authenticate requests
+middlewares.map((middleware) => app.use(middleware));
 // app.use(myMiddleware);
 
 export default (
