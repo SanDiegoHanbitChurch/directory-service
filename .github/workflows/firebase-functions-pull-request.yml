@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
   main:
-    name: Deploy to Firebase
+    name: Lint and Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,4 +13,3 @@ jobs:
         run: cd functions && npm run lint
       - name: Build
         run: cd functions && npm run build
-     
