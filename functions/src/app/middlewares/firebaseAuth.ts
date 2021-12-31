@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { RequestHandler } from "express";
+import {RequestHandler} from "express";
 
 admin.initializeApp();
 
