@@ -11,11 +11,13 @@ It acts as a proxy for [Planning Center](https://www.planningcenter.com/), where
 
 ## URLs
 
+All endpoints require authorization header with bearer token: `Authorization: Bearer GoogleAuthToken`
+
 | Method | Route                          | Status Code / Response         | Note                                   |
 | ------ | -------------------------------| -------------------------------| -------------------------------------- |
-| GET    | /v1/members                    | 200 Member[]                   | returns all members                    |
-| GET    | /v1/members/:id                | 200 Member <br> 404 Not Found  | returns a specific member or not found |
-| GET    | /v1/members?query=searchTerm   | 200 Member[]                   | returns matching members or empty result |
+| GET    | /v1/members                    | 200 Member[] <br> 403 Unauthorized                  | returns all members                    |
+| GET    | /v1/members/:id                | 200 Member <br> 403 Unauthorized <br> 404 Not Found  | returns a specific member or not found |
+| GET    | /v1/members?query=searchTerm   | 200 Member[] <br> 403 Unauthorized                  | returns matching members or empty result |
 
 ## Response Schema
 
