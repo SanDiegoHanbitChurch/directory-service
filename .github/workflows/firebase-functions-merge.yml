@@ -10,16 +10,7 @@ jobs:
     environment: dev
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
-        with:
-          token: ${{ secrets.ADMIN_TOKEN }}
-      - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@master"
-        with:
-          tag-prefix: 'v'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR:  'functions'
+        uses: actions/checkout@v2
       - name: Install Dependencies
         run: cd functions && npm ci
       - name: Set environment configuration
