@@ -7,6 +7,7 @@ jobs:
   refresh-configs:
     name: 'Refresh firebase configs'
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
       - name: use firebase project
@@ -38,6 +39,7 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
     environment: dev
+    
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2

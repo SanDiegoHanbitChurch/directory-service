@@ -4,15 +4,12 @@ on:
     types: [published]
 
 jobs:
-  build:
-    name: Build & Deploy
+  refresh-configs:
+    name: "Refresh firebase configs"
     runs-on: ubuntu-latest
     environment: live
+
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: cd functions && npm ci
       - name: use firebase project
         uses: w9jds/firebase-action@master
         with:
@@ -35,6 +32,31 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: functions:config:set planningcenter.baseurl=${{ secrets.PLANNING_CENTER_BASE_URL }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+  build:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    environment: live
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: "v"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR: "functions"
+      - name: Install Dependencies
+        run: cd functions && npm ci
+      - name: use firebase project
+        uses: w9jds/firebase-action@master
+        with:
+          args: use ${{ secrets.FIREBASE_PROJECT_ID }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Deploy to Firebase
