@@ -4,17 +4,13 @@ on:
     branches:
       - main
 jobs:
-  bump-version:
-    name: 'Bump Version on master'
+  build:
+    name: Build & Deploy
     runs-on: ubuntu-latest
-
+    environment: dev
     steps:
-      - name: 'Checkout source code'
-        uses: 'actions/checkout@v2'
-        with:
-          ref: ${{ github.ref }}
-      - name: 'cat package.json'
-        run: cat ./functions/package.json
+      - name: Checkout Repo
+        uses: actions/checkout@v2
       - name: 'Automated Version Bump'
         id: version-bump
         uses: 'phips28/gh-action-bump-version@master'
@@ -23,20 +19,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR:  'functions'
-      - name: 'cat package.json'
-        run: cat ./functions/package.json
-      - name: 'Output Step'
-        env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
-        run: echo "new tag $NEW_TAG"
-
-  build:
-    name: Build & Deploy
-    runs-on: ubuntu-latest
-    environment: dev
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
       - name: Install Dependencies
         run: cd functions && npm ci
       - name: use firebase project
