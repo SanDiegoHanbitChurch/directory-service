@@ -50,15 +50,6 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: "Automated Version Bump"
-        id: version-bump
-        uses: "phips28/gh-action-bump-version@master"
-        with:
-          tag-prefix: "v"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR: "functions"
-
       - name: Cache node modules
         uses: actions/cache@v2
         env:
