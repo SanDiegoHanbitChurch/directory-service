@@ -10,6 +10,8 @@ jobs:
     environment: live
 
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
       - name: use firebase project
         uses: w9jds/firebase-action@master
         with:
