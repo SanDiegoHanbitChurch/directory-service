@@ -1,13 +1,13 @@
-name: Deploy the main branch
+name: Deploy to live project
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
+
 jobs:
   build:
     name: Build & Deploy
     runs-on: ubuntu-latest
-    environment: dev
+    environment: live
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
       - name: Set environment configuration
         uses: w9jds/firebase-action@master
         with:
-          args: functions:config:set planningcenter.peopleurl=${{ secrets.PLANNING_PEOPLE_URL }}
+          args: functions:config:set planningcenter.baseurl=${{ secrets.PLANNING_CENTER_BASE_URL }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Deploy to Firebase
