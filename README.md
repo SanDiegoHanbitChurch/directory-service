@@ -7,7 +7,7 @@ It acts as a proxy for [Planning Center](https://www.planningcenter.com/), where
 
 | Environment | Host |
 |-------------|------|
-| Dev         | https://us-central1-hanbit-directory-dev.cloudfunctions.net/ |
+| Dev         | https://us-central1-portal-dev-819e4.cloudfunctions.net/ |
 
 ## URLs
 
@@ -37,4 +37,4 @@ All endpoints require authorization header with bearer token: `Authorization: Be
 - `npm run build:watch`: Typescript build in watch mode
 - `firebase emulators:start --inspect-functions`: Start firebase emulator with debug mode
 - Click on "Debug" profile on VS Code
-- Hit http://localhost:5001/hanbit-directory-dev/us-central1/members from Postman
+- Hit http://localhost:5001/portal-dev-819e4/us-central1/members from Postman
