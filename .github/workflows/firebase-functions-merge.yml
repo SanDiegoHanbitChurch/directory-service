@@ -4,6 +4,30 @@ on:
     branches:
       - main
 jobs:
+  refresh-configs:
+    name: 'Refresh firebase configs'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set environment configuration
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set planningcenter.applicationid=${{ secrets.PLANNING_CENTER_APPLICATION_ID }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Set environment configuration
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set planningcenter.secret=${{ secrets.PLANNING_CENTER_SECRET }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Set environment configuration
+        uses: w9jds/firebase-action@master
+        with:
+          args: functions:config:set planningcenter.baseurl=${{ secrets.PLANNING_CENTER_BASE_URL }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
   build:
     name: Build & Deploy
     runs-on: ubuntu-latest
@@ -25,24 +49,6 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: use ${{ secrets.FIREBASE_PROJECT_ID }}
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Set environment configuration
-        uses: w9jds/firebase-action@master
-        with:
-          args: functions:config:set planningcenter.applicationid=${{ secrets.PLANNING_CENTER_APPLICATION_ID }}
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Set environment configuration
-        uses: w9jds/firebase-action@master
-        with:
-          args: functions:config:set planningcenter.secret=${{ secrets.PLANNING_CENTER_SECRET }}
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      - name: Set environment configuration
-        uses: w9jds/firebase-action@master
-        with:
-          args: functions:config:set planningcenter.baseurl=${{ secrets.PLANNING_CENTER_BASE_URL }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Deploy to Firebase
