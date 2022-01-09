@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: use firebase project
+        uses: w9jds/firebase-action@master
+        with:
+          args: use ${{ secrets.FIREBASE_PROJECT_ID }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Set environment configuration
         uses: w9jds/firebase-action@master
         with:
